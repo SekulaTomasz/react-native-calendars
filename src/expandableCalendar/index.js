@@ -62,7 +62,8 @@ class ExpandableCalendar extends Component {
     /** whether to disable the week scroll in closed position */
     disableWeekScroll: PropTypes.bool,
 
-    hideArrows: PropTypes.bool
+    hideArrows: PropTypes.bool,
+    runForce: PropTypes.bool
   }
 
   static defaultProps = {
@@ -71,7 +72,8 @@ class ExpandableCalendar extends Component {
     firstDay: 0,
     leftArrowImageSource: require('../calendar/img/previous.png'),
     rightArrowImageSource: require('../calendar/img/next.png'),
-    allowShadow: true
+    allowShadow: true,
+    runForce: false
   }
 
   static positions = POSITIONS;
@@ -217,7 +219,7 @@ class ExpandableCalendar extends Component {
       }
       return marked;
     } 
-    return {[context.date]: {selected: true}};
+    return JSON.parse(JSON.stringify({[context.date]: {selected: true}}));
   }
 
   shouldHideArrows() {
@@ -289,8 +291,9 @@ class ExpandableCalendar extends Component {
 
   /** Animated */
 
-  bounceToPosition(toValue, runForce = false) {
-    if (!this.props.disablePan || runForce) {
+  bounceToPosition(toValue) {
+  
+    if (!this.props.disablePan || this.props.runForce) {
       const {deltaY} = this.state;
       const threshold = this.openHeight / 1.75;
 
