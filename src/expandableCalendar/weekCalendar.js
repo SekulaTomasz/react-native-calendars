@@ -110,6 +110,7 @@ class WeekCalendar extends Component {
   }
 
   onScroll = ({nativeEvent: {contentOffset: {x}}}) => {
+    debugger;
     const newPage = Math.round(x / this.containerWidth);
     
     if (this.page !== newPage) {
@@ -133,6 +134,7 @@ class WeekCalendar extends Component {
   }
 
   onMomentumScrollEnd = () => {
+    debugger;
     const {items} = this.state;
     const isFirstPage = this.page === 0;
     const isLastPage = this.page === items.length - 1;

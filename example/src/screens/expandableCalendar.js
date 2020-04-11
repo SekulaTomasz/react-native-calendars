@@ -51,12 +51,28 @@ const ITEMS = [
 
 export default class ExpandableCalendarScreen extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      markedDates: null
+    }
+  }
+
   onDateChanged = (/* date, updateSource */) => {
     // console.warn('ExpandableCalendarScreen onDateChanged: ', date, updateSource);
     // fetch and set data for date + week ahead
+    this.setState({
+      ...this.state,
+      markedDates: null
+    });
+    this.setState({
+      ...this.state,
+      markedDates: this.getMarkedDates()
+    });
   }
 
   onMonthChange = (/* month, updateSource */) => {
+    
     // console.warn('ExpandableCalendarScreen onMonthChange: ', month, updateSource);
   }
   
@@ -158,13 +174,7 @@ export default class ExpandableCalendarScreen extends Component {
         // }} 
         // todayBottomMargin={16}
       > 
-        {this.props.weekView ? 
-          <WeekCalendar
-            testID={testIDs.weekCalendar.CONTAINER}
-            firstDay={1}
-            markedDates={this.getMarkedDates()}
-          /> :
-          <ExpandableCalendar
+        <ExpandableCalendar
             testID={testIDs.expandableCalendar.CONTAINER}
             // horizontal={false}
             // hideArrows
@@ -179,11 +189,11 @@ export default class ExpandableCalendarScreen extends Component {
             firstDay={1}
             hideKnob
             hideArrows
-            markedDates={this.getMarkedDates()} // {'2019-06-01': {marked: true}, '2019-06-02': {marked: true}, '2019-06-03': {marked: true}};
+            runForce
+            markedDates={this.state.markedDates} // {'2019-06-01': {marked: true}, '2019-06-02': {marked: true}, '2019-06-03': {marked: true}};
             leftArrowImageSource={require('../img/previous.png')}
             rightArrowImageSource={require('../img/next.png')}
           />
-        }
         <AgendaList
           sections={ITEMS}
           extraData={this.state}

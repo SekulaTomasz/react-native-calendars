@@ -219,7 +219,7 @@ class ExpandableCalendar extends Component {
       }
       return marked;
     } 
-    return JSON.parse(JSON.stringify({[context.date]: {selected: true}}));
+    return {[context.date]: {selected: true}};
   }
 
   shouldHideArrows() {
