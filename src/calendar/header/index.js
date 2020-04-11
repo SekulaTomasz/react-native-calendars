@@ -25,7 +25,8 @@ class CalendarHeader extends Component {
     onPressArrowRight: PropTypes.func,
     disableArrowLeft: PropTypes.bool,
     disableArrowRight: PropTypes.bool,
-    webAriaLevel: PropTypes.number
+    webAriaLevel: PropTypes.number,
+    headerPressEvent: PropTypes.func
   };
 
   static defaultProps = {
@@ -40,6 +41,7 @@ class CalendarHeader extends Component {
     this.substractMonth = this.substractMonth.bind(this);
     this.onPressLeft = this.onPressLeft.bind(this);
     this.onPressRight = this.onPressRight.bind(this);
+    this.headerPressEvent = this.headerPressEvent.bind(this);
   }
 
   addMonth() {
@@ -97,6 +99,11 @@ class CalendarHeader extends Component {
     return this.addMonth();
   }
 
+  headerPressEvent(){
+    const {headerPressEvent} = this.props;
+    return headerPressEvent();
+  }
+
   render() {
     let leftArrow = <View/>;
     let rightArrow = <View/>;
@@ -144,7 +151,6 @@ class CalendarHeader extends Component {
     }
 
     const webProps = Platform.OS === 'web' ? {'aria-level': this.props.webAriaLevel} : {};
-
     return (
       <View
         testID={testID}
@@ -162,14 +168,16 @@ class CalendarHeader extends Component {
         <View style={this.style.header}>
           {leftArrow}
           <View style={{flexDirection: 'row'}}>
-            <Text
-              allowFontScaling={false}
-              style={this.style.monthText}
-              {...webProps}
-              testID={testID ? `${HEADER_MONTH_NAME}-${testID}`: HEADER_MONTH_NAME}
-            >
-              {this.props.month.toString(this.props.monthFormat)}
-            </Text>
+            <TouchableOpacity onPress={this.headerPressEvent}>
+              <Text
+                allowFontScaling={false}
+                style={this.style.monthText}
+                {...webProps}
+                testID={testID ? `${HEADER_MONTH_NAME}-${testID}`: HEADER_MONTH_NAME}
+              >
+                {this.props.month.toString(this.props.monthFormat)}
+              </Text>
+            </TouchableOpacity>
             {indicator}
           </View>
           {rightArrow}

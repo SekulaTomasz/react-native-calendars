@@ -42,6 +42,7 @@ const DAY_NAMES_PADDING = 24;
  * @example: https://github.com/wix/react-native-calendars/blob/master/example/src/screens/expandableCalendar.js
  */
 class ExpandableCalendar extends Component {
+  
   static displayName = 'ExpandableCalendar';
 
   static propTypes = {
@@ -59,7 +60,9 @@ class ExpandableCalendar extends Component {
     /** whether to have shadow/elevation for the calendar */
     allowShadow: PropTypes.bool,
     /** whether to disable the week scroll in closed position */
-    disableWeekScroll: PropTypes.bool
+    disableWeekScroll: PropTypes.bool,
+
+    hideArrows: PropTypes.bool
   }
 
   static defaultProps = {
@@ -276,10 +279,18 @@ class ExpandableCalendar extends Component {
     this.bounceToPosition();
   };
 
-  /** Animated */
+  headerPressHandler = () => {
+    if (this.state.position === POSITIONS.OPEN) {
+     return this.bounceToPosition(this.closedHeight, true);
+    }
+    return this.bounceToPosition(this.openHeight, true)
+  }
   
-  bounceToPosition(toValue) {  
-    if (!this.props.disablePan) {  
+
+  /** Animated */
+
+  bounceToPosition(toValue, runForce = false) {
+    if (!this.props.disablePan || runForce) {
       const {deltaY} = this.state;
       const threshold = this.openHeight / 1.75;
 
@@ -508,8 +519,9 @@ class ExpandableCalendar extends Component {
               onPressArrowLeft={this.onPressArrowLeft}
               onPressArrowRight={this.onPressArrowRight}
               hideExtraDays={!horizontal}
-              renderArrow={this.renderArrow}
+              renderArrow={this.props.hideArrows ? null : this.renderArrow}
               staticHeader
+              headerPressEvent={this.headerPressHandler}
             /> 
             {horizontal && this.renderWeekCalendar()}
             {!hideKnob && this.renderKnob()}

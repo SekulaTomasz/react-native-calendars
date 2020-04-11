@@ -51,7 +51,9 @@ class CalendarList extends Component {
     /** Whether to use static header that will not scroll with the list (horizontal only) */
     staticHeader: PropTypes.bool,
     /** A custom key extractor for the generated calendar months */
-    keyExtractor: PropTypes.func
+    keyExtractor: PropTypes.func,
+
+    headerPressEvent: PropTypes.func
   }
 
   static defaultProps = {
@@ -262,6 +264,7 @@ class CalendarList extends Component {
   renderStaticHeader() {
     const {staticHeader, horizontal} = this.props;
     const useStaticHeader = staticHeader && horizontal;
+ 
     
     if (useStaticHeader) {
       let indicator;
@@ -287,6 +290,7 @@ class CalendarList extends Component {
           testID={STATIC_HEADER}
           accessibilityElementsHidden={true} // iOS
           importantForAccessibility={'no-hide-descendants'} // Android
+          headerPressEvent={this.props.headerPressEvent}
         />
       );
     }
