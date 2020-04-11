@@ -431,7 +431,7 @@ class ExpandableCalendar extends Component {
   renderWeekCalendar() {
     const {position} = this.state;
     const {disableWeekScroll} = this.props;
-    const WeekComponent = disableWeekScroll ? Week : WeekCalendar;
+    //const WeekComponent = disableWeekScroll ? Week : WeekCalendar;
     debugger;
     return (
       <Animated.View
@@ -445,7 +445,7 @@ class ExpandableCalendar extends Component {
         }}
         pointerEvents={position === POSITIONS.CLOSED ? 'auto' : 'none'}
       >
-        <WeekComponent
+        <Week
           {...this.props}
           current={this.props.context.date}
           onDayPress={this.onDayPress}
