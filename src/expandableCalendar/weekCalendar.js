@@ -90,7 +90,6 @@ class WeekCalendar extends Component {
   }
 
   getMarkedDates() {
-    debugger;
     const {context, markedDates} = this.props;
 
     if (markedDates) {

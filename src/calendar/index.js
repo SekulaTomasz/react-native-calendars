@@ -159,7 +159,6 @@ class Calendar extends Component {
   }
 
   renderDay(day, id) {
-    console.log('czxczs')
     const minDate = parseDate(this.props.minDate);
     const maxDate = parseDate(this.props.maxDate);
     let state = '';
