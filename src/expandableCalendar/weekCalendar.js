@@ -29,7 +29,7 @@ class WeekCalendar extends Component {
     /** whether to have shadow/elevation for the calendar */
     allowShadow: PropTypes.bool,
     /** whether to hide the names of the week days */
-    hideDayNames: PropTypes.bool
+    hideDayNames: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -168,7 +168,7 @@ class WeekCalendar extends Component {
         key={item} 
         current={item} 
         style={[{width: calendarWidth || this.containerWidth}, style]}
-        markedDates={this.getMarkedDates()}
+        markedDates={{...this.props.markedDates}}
         onDayPress={onDayPress || this.onDayPress}
       />
     );
