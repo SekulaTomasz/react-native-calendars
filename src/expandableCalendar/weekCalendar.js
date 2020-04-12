@@ -58,7 +58,7 @@ class WeekCalendar extends Component {
       this.list.current.scrollToIndex({animated: false, index: NUMBER_OF_PAGES});
     }
     if(updateSource === UPDATE_SOURCES.WEEK_SCROLL){
-      this.setState({items: Object.keys(this.props.markedDates)});
+      this.setState({items: this.getDatesArray()});
       
     }
   }
