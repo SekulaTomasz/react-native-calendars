@@ -432,6 +432,7 @@ class ExpandableCalendar extends Component {
     const {position} = this.state;
     const {disableWeekScroll} = this.props;
     const WeekComponent = disableWeekScroll ? Week : WeekCalendar;
+
     return (
       <Animated.View
         ref={e => this.weekCalendar = e}
