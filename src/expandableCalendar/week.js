@@ -82,6 +82,7 @@ class Week extends Component {
   }
 
   getDateMarking(day) {
+    debugger;
     const {markedDates} = this.props;
     if (!markedDates) {
       return false;
@@ -144,6 +145,7 @@ class Week extends Component {
   }
 
   render() {
+    debugger;
     const {current} = this.props;
     const dates = this.getWeek(current);
     const week = [];

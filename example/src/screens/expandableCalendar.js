@@ -63,10 +63,6 @@ export default class ExpandableCalendarScreen extends Component {
     // fetch and set data for date + week ahead
     this.setState({
       ...this.state,
-      markedDates: null
-    });
-    this.setState({
-      ...this.state,
       markedDates: this.getMarkedDates()
     });
   }

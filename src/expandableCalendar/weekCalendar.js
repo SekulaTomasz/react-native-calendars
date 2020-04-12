@@ -64,6 +64,7 @@ class WeekCalendar extends Component {
   }
 
   getDatesArray() {
+    debugger;
     const array = [];
     for (let index = -NUMBER_OF_PAGES; index <= NUMBER_OF_PAGES; index++) {
       const d = this.getDate(index);
@@ -160,7 +161,7 @@ class WeekCalendar extends Component {
 
   renderItem = ({item}) => {
     const {calendarWidth, style, onDayPress, ...others} = this.props;
-
+    debugger;
     return (
       <Week 
         {...others} 
