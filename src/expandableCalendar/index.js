@@ -282,8 +282,9 @@ class ExpandableCalendar extends Component {
   };
 
   headerPressHandler = () => {
+    debugger;
     if (this.state.position === POSITIONS.OPEN) {
-     return this.bounceToPosition(this.closedHeight, true);
+      return this.bounceToPosition(this.closedHeight, true);
     }
     return this.bounceToPosition(this.openHeight, true)
   }
@@ -356,6 +357,7 @@ class ExpandableCalendar extends Component {
   }
 
   onDayPress = (value) => { // {year: 2019, month: 4, day: 22, timestamp: 1555977600000, dateString: "2019-04-23"}
+  debugger;
     _.invoke(this.props.context, 'setDate', value.dateString, UPDATE_SOURCES.DAY_PRESS); 
     
     setTimeout(() => { // to allows setDate to be completed
